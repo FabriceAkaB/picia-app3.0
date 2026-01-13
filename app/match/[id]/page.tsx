@@ -36,10 +36,6 @@ export default async function PublicMatchPage({ params }: { params: Promise<{ id
             <main className="public-container">
                 <section id="gallery" className="public-section">
                     <div className="public-section-header">
-                        <div>
-                            <h2>Joueurs identifies</h2>
-                            <p>Selectionnez votre profil pour acceder a votre pack de photos.</p>
-                        </div>
                         <span className="public-pill">{clusters.length} joueurs</span>
                     </div>
 

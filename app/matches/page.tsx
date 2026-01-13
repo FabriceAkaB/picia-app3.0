@@ -30,10 +30,6 @@ export default async function MatchesPage({ searchParams }: { searchParams?: { q
             <main className="public-container">
                 <section id="gallery" className="public-section">
                     <div className="public-section-header">
-                        <div>
-                            <h2>Evenements recents</h2>
-                            <p>Retrouvez toutes les rencontres publiees et accedez aux photos en un clic.</p>
-                        </div>
                         <span className="public-pill">{matches.length} matchs</span>
                     </div>
 
