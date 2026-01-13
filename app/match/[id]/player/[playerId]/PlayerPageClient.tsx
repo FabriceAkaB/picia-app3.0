@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Navbar from '@/components/Navbar';
+import Link from 'next/link';
 
 type Props = {
     matchId: string;
@@ -82,9 +83,9 @@ export default function PlayerPageClient({ matchId, playerId, matchTitle, previe
                                 <p className="vat-text">Livraison sous 24-48h après achat</p>
                             </div>
 
-                            <button className="cta-button">
+                            <Link href={`/match/${matchId}/player/${playerId}/thank-you`} className="cta-button">
                                 Acheter mon pack
-                            </button>
+                            </Link>
 
                             <div className="guarantee-row">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
@@ -353,6 +354,9 @@ export default function PlayerPageClient({ matchId, playerId, matchTitle, previe
                     color: #86868b;
                 }
                 .cta-button {
+                    display: block;
+	                text-align: center;
+                    text-decoration: none;
                     width: 100%;
                     padding: 16px 24px;
                     font-size: 1rem;
@@ -363,11 +367,12 @@ export default function PlayerPageClient({ matchId, playerId, matchTitle, previe
                     border-radius: 12px;
                     cursor: pointer;
                     transition: all 0.2s;
+                    box-sizing: border-box;
                 }
                 .cta-button:hover {
                     background: #333;
-                    transform: translateY(-1px);
-                    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
                 }
                 .guarantee-row {
                     display: flex;
