@@ -11,6 +11,7 @@ type Props = {
 
 export default function PlayerCard({ matchId, clusterId, faceId }: Props) {
     const [isHovered, setIsHovered] = useState(false);
+    const [imgError, setImgError] = useState(false);
 
     return (
         <div
@@ -41,18 +42,44 @@ export default function PlayerCard({ matchId, clusterId, faceId }: Props) {
             >
                 <div style={{
                     aspectRatio: '3/4',
-                    position: 'relative'
+                    position: 'relative',
+                    background: 'linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%)', // Much whiter gradient
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
                 }}>
-                    <img
-                        src={`/api/public/previews/${matchId}/${clusterId}/${faceId}`}
-                        alt="Aperçu pack"
-                        style={{
+                    {imgError ? (
+                        <div style={{
                             width: '100%',
                             height: '100%',
-                            objectFit: 'cover',
-                            display: 'block'
-                        }}
-                    />
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: '#9ca3af' // Darker grey (gray-400) to ensure visibility
+                        }}>
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ overflow: 'visible' }}>
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                                <line x1="12" x2="12.01" y1="17" y2="17" />
+                            </svg>
+                        </div>
+                    ) : (
+                        <img
+                            src={`/api/public/previews/${matchId}/${clusterId}/${faceId}`}
+                            alt="Aperçu pack"
+                            onError={() => setImgError(true)}
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                display: 'block',
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                zIndex: 1
+                            }}
+                        />
+                    )}
 
                     {/* Hover Overlay */}
                     <div style={{
@@ -66,7 +93,8 @@ export default function PlayerCard({ matchId, clusterId, faceId }: Props) {
                         alignItems: 'center',
                         justifyContent: 'center',
                         opacity: isHovered ? 1 : 0,
-                        transition: 'opacity 0.2s ease'
+                        transition: 'opacity 0.2s ease',
+                        zIndex: 2
                     }}>
                         <div style={{
                             background: 'rgba(255, 255, 255, 0.9)',

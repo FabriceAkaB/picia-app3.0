@@ -70,12 +70,13 @@ export default function Navbar() {
                 </div>
 
                 {/* Center: Logo */}
-                <Link href="/matches" style={{
+                <Link href="/matches" className="font-logo" style={{
                     fontWeight: '700',
-                    fontSize: '1.1rem',
+                    fontSize: '1.2rem',
                     letterSpacing: '3px',
                     color: '#111',
-                    textDecoration: 'none'
+                    textDecoration: 'none',
+                    fontFamily: '"Manrope", var(--font-manrope), sans-serif'
                 }}>
                     ANOBLE
                 </Link>

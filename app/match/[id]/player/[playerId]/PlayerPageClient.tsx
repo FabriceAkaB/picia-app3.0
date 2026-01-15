@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
-import Link from 'next/link';
 
 type Props = {
     matchId: string;
@@ -14,6 +14,7 @@ type Props = {
 export default function PlayerPageClient({ matchId, playerId, matchTitle, previewPhotos }: Props) {
     const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
     const [showDetails, setShowDetails] = useState(false);
+    const router = useRouter();
 
     const goToPrev = () => {
         setSelectedPhotoIndex((prev) => (prev === 0 ? previewPhotos.length - 1 : prev - 1));
@@ -83,9 +84,12 @@ export default function PlayerPageClient({ matchId, playerId, matchTitle, previe
                                 <p className="vat-text">Livraison sous 24-48h après achat</p>
                             </div>
 
-                            <Link href={`/match/${matchId}/player/${playerId}/thank-you`} className="cta-button">
+                            <button
+                                className="cta-button"
+                                onClick={() => router.push(`/match/${matchId}/player/${playerId}/thank-you`)}
+                            >
                                 Acheter mon pack
-                            </Link>
+                            </button>
 
                             <div className="guarantee-row">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
@@ -355,24 +359,32 @@ export default function PlayerPageClient({ matchId, playerId, matchTitle, previe
                 }
                 .cta-button {
                     display: block;
-	                text-align: center;
+                    text-align: center;
                     text-decoration: none;
                     width: 100%;
-                    padding: 16px 24px;
-                    font-size: 1rem;
+                    padding: 14px 20px;
+                    font-size: 0.9rem;
                     font-weight: 600;
                     background: #111;
                     color: #fff;
-                    border: none;
-                    border-radius: 12px;
+                    border: 1px solid #1d1d1f;
+                    border-radius: 6px;
                     cursor: pointer;
-                    transition: all 0.2s;
+                    letter-spacing: 0.02em;
+                    text-transform: uppercase;
+                    transition: all 0.2s ease;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
                     box-sizing: border-box;
                 }
                 .cta-button:hover {
-                    background: #333;
-                    transform: translateY(-2px);
-                    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+                    background: #222;
+                    transform: translateY(-1px);
+                    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+                    border-color: #333;
+                }
+                .cta-button:active {
+                    transform: translateY(0);
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
                 }
                 .guarantee-row {
                     display: flex;

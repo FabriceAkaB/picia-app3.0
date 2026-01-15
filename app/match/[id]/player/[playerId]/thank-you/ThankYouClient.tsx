@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
-import Link from 'next/link';
 
 type Props = {
     matchId: string;
@@ -13,6 +13,7 @@ type Props = {
 
 export default function ThankYouPage({ matchId, playerId, matchTitle, previewPhotos }: Props) {
     const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
+    const router = useRouter();
 
     return (
         <div className="page-container">
@@ -34,9 +35,12 @@ export default function ThankYouPage({ matchId, playerId, matchTitle, previewPho
 
                 {/* CTA - Centered button */}
                 <section className="cta-section">
-                    <Link href={`/match/${matchId}/player/${playerId}/tracking`} className="cta-button">
+                    <button
+                        className="cta-button"
+                        onClick={() => router.push(`/match/${matchId}/player/${playerId}/tracking`)}
+                    >
                         Suivre l'avancement de mon pack
-                    </Link>
+                    </button>
                 </section>
 
                 {/* Preview Photos Available Now */}
@@ -132,20 +136,25 @@ export default function ThankYouPage({ matchId, playerId, matchTitle, previewPho
                 }
                 .cta-button {
                     display: inline-block;
-                    padding: 16px 40px;
+                    padding: 14px 32px;
                     background: #111;
                     color: #fff;
                     text-decoration: none;
-                    font-size: 1rem;
+                    font-size: 0.9rem;
                     font-weight: 600;
-                    border-radius: 12px;
-                    transition: all 0.2s;
-                    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+                    border-radius: 6px;
+                    border: 1px solid #1d1d1f;
+                    letter-spacing: 0.02em;
+                    text-transform: uppercase;
+                    transition: all 0.2s ease;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                    cursor: pointer;
                 }
                 .cta-button:hover {
-                    background: #333;
-                    transform: translateY(-2px);
-                    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+                    background: #222;
+                    transform: translateY(-1px);
+                    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+                    border-color: #333;
                 }
                 .cta-button:active {
                     transform: translateY(0);

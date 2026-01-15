@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
 
@@ -10,6 +11,7 @@ type Props = {
 };
 
 export default function TrackingClient({ matchId, playerId, matchTitle }: Props) {
+    const router = useRouter();
     const steps = [
         { label: 'Achat confirmé', done: true },
         { label: 'Sélection des photos', done: false, active: true },
@@ -68,9 +70,12 @@ export default function TrackingClient({ matchId, playerId, matchTitle }: Props)
                 {/* Demo CTA */}
                 <section className="cta-section">
                     <p className="cta-text">Curieux de voir à quoi ressemblera ton pack ?</p>
-                    <Link href={`/match/${matchId}/player/${playerId}/pack`} className="cta-button">
+                    <button
+                        className="cta-button"
+                        onClick={() => router.push(`/match/${matchId}/player/${playerId}/pack`)}
+                    >
                         Voir à quoi ressemblera mon pack final
-                    </Link>
+                    </button>
                 </section>
 
                 {/* Back Link */}
@@ -219,17 +224,25 @@ export default function TrackingClient({ matchId, playerId, matchTitle }: Props)
                 }
                 .cta-button {
                     display: inline-block;
-                    padding: 14px 28px;
+                    padding: 12px 24px;
                     background: #111;
                     color: #fff;
                     text-decoration: none;
-                    font-size: 0.95rem;
+                    font-size: 0.9rem;
                     font-weight: 600;
-                    border-radius: 10px;
-                    transition: all 0.2s;
+                    border-radius: 6px;
+                    border: 1px solid #1d1d1f;
+                    letter-spacing: 0.02em;
+                    text-transform: uppercase;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
                 }
                 .cta-button:hover {
-                    background: #333;
+                    background: #222;
+                    transform: translateY(-1px);
+                    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+                    border-color: #333;
                 }
 
                 .back-section {
